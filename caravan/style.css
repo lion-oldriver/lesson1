@@ -57,21 +57,10 @@ header.heading {
   color: #fff;
 }
 
-.main {
-  width: 840px;
-  display: flex; /*flexboxの利用*/
-  justify-content: center;
-  margin: 0 auto;
-}
-
 .blog {
-  width: 600px;
-  height: 1400px;
 }
 
 .sidebar {
-  width: 240px;
-  height: 1400px;
 }
 
 footer {

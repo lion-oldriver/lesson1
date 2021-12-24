@@ -17,34 +17,48 @@
   <script type="text/babel">
     let dom = document.querySelector('#root')
 
-    let title = "React page"
-    let message = "メッセージを表示します"
-    let data = {
-      url: 'https://google.com',
-      title: 'Google',
-      caption: '*これはGoogleの検索サイトです'
+    let message = "React component page"
+
+    class Rect extends React.Component{
+      x = 0
+      y = 0
+      width = 0
+      height = 0
+      color = "white"
+      style = {}
+
+      constructor(props){
+        super(props)
+        this.x = props.x
+        this.y = props.y
+        this.width = props.w
+        this.height = props.h
+        this.color = props.c
+        this.style = {
+          backgroundColor: this.color,
+          position: "absolute",
+          left: this.x + "px",
+          top: this.y + "px",
+          width: this.width + "px",
+          height: this.height + "px"
+        }
+      }
+
+      render(){
+        return <div style={this.style}></div>
+      }
     }
 
-    let e1 = (
+    let el = (
       <div>
-        <h4>{title}</h4>
-        <h6>{message}</h6>
-        {(() => 
-          <div className="card mt-4">
-            <div className="card-header">
-              {data.title}
-            </div>
-            <div className="card-body">
-              {data.caption}
-            </div>
-            <div className="card-footer">
-              <a href={data.url}>{data.title}に移動</a>
-            </div>
-          </div>
-        )()}
+        <h5 className="mb-4">{message}</h5>
+        <div>
+          <Rect x="200" y="200" w="200" h="200" c="cyan" />
+          <Rect x="300" y="300" w="200" h="200" c="magenta" />
+        </div>
       </div>
     )
-    ReactDOM.render(e1, dom)
+    ReactDOM.render(el, dom)
   </script>
 </body>
 </html>

@@ -1,70 +1,64 @@
-import React, {Component} from 'react'
+import React, {useEffect, useState} from 'react'
 import './App.css'
+import usePersist from './Persist'
 
-let theme = {
-  light:{
-    styles:{
-      backgroundColor: "#f0f9ff",
-      color: "#00f",
-    },
-    head: "bg-primary text-white display-4 mb-4",
-    alert: "alert alert-primary my-3",
-    text: "text-primary m-3",
-    foot: "py-4",
-  },
-  dark:{
-    styles:{
-      backgroundColor: "#336",
-      color: "#eef",
-    },
-    head: "bg-secondary text-white display-4 mb-4",
-    alert: "alert alert-dark my-3",
-    text: "text-light m-3",
-    foot: "py-4",
+
+function AlertMessage(props){
+  const [name, setName] = useState("")
+  const [mail, setMail] = useState("")
+  const [age, setAge] = useState(0)
+  const [mydata, setMydata] = usePersist("mydata", null)
+
+  const onChangeName = (e) =>{
+    setName(e.target.value)
   }
-}
-const ThemeContext = React.createContext(theme.dark)
+  const onChangeMail = (e) =>{
+    setMail(e.target.value)
+  }
+  const onChangeAge = (e) =>{
+    setAge(e.target.value)
+  }
+  const onAction = (e) =>{
+    const data ={
+      name: name,
+      mail: mail,
+      age: age
+    }
+    setMydata(data)
+  }
 
-class App extends Component{
-  static contextType = ThemeContext
-
-  render(){
-    return(
-      <div style={this.context.styles}>
-        <h1 className={this.context.head}>React</h1>
-        <div className='container'>
-          <Title value="Content page" />
-          <Message value="This is Content sample" />
-          <Message value="＊これはテーマのサンプルです" />
-          <div className={this.context.foot}></div>
-        </div>
+  return(
+    <div className='alert alert-primary h5 ;text-primary'>
+      <h5 className='mb-4'>{JSON.stringify(mydata)}</h5>
+      <div className='form-group'>
+        <lavel className="h6">Name</lavel>
+        <input type="text" onChange={onChangeName} className='form-control' />
       </div>
-    )
-  }
-}
-
-class Title extends Component{
-  static contextType = ThemeContext
-
-  render(){ 
-    return(
-      <div className={this.context.alert}>
-        <h2 style={this.context.style}>{this.props.value}</h2>
+      <div className='form-group'>
+        <lavel className="h6">Mail</lavel>
+        <input type="mail" onChange={onChangeMail} className='form-control' />
       </div>
-    )
-  }
+      <div className='form-group'>
+        <lavel className="h6">Age</lavel>
+        <input type="number" onChange={onChangeAge} className='form-control' />
+      </div>
+      <button onClick={onAction} className='btn btn-primary'>
+        Save it!
+      </button>
+    </div> 
+  )
 }
 
-class Message extends Component{
-  static contextType = ThemeContext
-
-  render(){
-    return(
-      <div style={this.context.style}>
-        <p className={this.context.text}>{this.props.value}</p>
+function App(){
+  return(
+    <div>
+      <h1 className='bg-primary text-white display-4'>React</h1>
+      <div className='container'>
+        <h4 className='my-3'>Hooks sample</h4>
+        <AlertMessage />
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default App

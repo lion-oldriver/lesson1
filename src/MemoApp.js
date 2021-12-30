@@ -1,7 +1,7 @@
 import './App.css'
 import MemoPage from './memo/MemoPage'
 
-function App(){
+function MemoApp(){
   return(
     <div>
       <h1 className='bg-primary text-white display-4'>React</h1>
@@ -13,4 +13,4 @@ function App(){
   )
 }
 
-export default App
+export default MemoApp

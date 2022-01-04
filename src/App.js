@@ -1,35 +1,13 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux'
-import {textChange} from './action';
+import React from 'react';
+import AddTodo from './containers/AddTodo';
+import VisibleTodoList from './containers/VisibleTodoList'
+import Footer from './components/Footer'
 
-class App extends Component {
-  render() {
-    const props = this.props;
-    console.log(props);
-
-    return (
-      <React.Fragment>
-        <div>文字数: {props.textLength}</div>
-        <textarea type="text" onChange={e => props.textChange(e.target.value, e.target.value.length)} />
-      </React.Fragment>
-    );
-  }
-}
-
-const mapStateToProps = state => {
-  return {
-    textValue: state.text.textValue,
-    textLength: state.text.textLength,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    textChange: (textValue, textLength) => dispatch(textChange(textValue, textLength)),
-  };
-};
-
-export default connect (
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+const App = () => (
+  <div>
+    <AddTodo />
+    <VisibleTodoList />
+    <Footer />
+  </div>
+)
+export default App
